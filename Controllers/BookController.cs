@@ -48,5 +48,19 @@ namespace MyCatalog.Controllers
             // Redirect to the "Index" action to display the list of books.
             return RedirectToAction("Index");
         }
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var book = await _db.Books.FindAsync(id);
+            if (book == null)
+            {
+                return NotFound();
+            }
+
+            _db.Books.Remove(book);
+            await _db.SaveChangesAsync();
+
+            return Ok();
+        }
     }
 }
