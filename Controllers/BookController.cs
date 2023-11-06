@@ -48,18 +48,26 @@ namespace MyCatalog.Controllers
             // Redirect to the "Index" action to display the list of books.
             return RedirectToAction("Index");
         }
+
+        // Define a [HttpPost] action method named "Delete" to handle deleting a book.
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
+            // Find the book with the specified ID in the database.
             var book = await _db.Books.FindAsync(id);
             if (book == null)
             {
+                // If the book is not found, return a "Not Found" response.
                 return NotFound();
             }
 
+            // Remove the book from the database context's "Books" DbSet.
             _db.Books.Remove(book);
+
+            // Save the changes to the database.
             await _db.SaveChangesAsync();
 
+            // Return an "Ok" response indicating that the book has been deleted.
             return Ok();
         }
     }

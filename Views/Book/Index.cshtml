@@ -1,89 +1,91 @@
-@model IEnumerable<BooksEntity>
+@model IEnumerable<BooksEntity>  //Define the model type for this view
 
 @{
-    ViewData["Title"] = "Books";
+    ViewData["Title"] = "Books";  //Set the view's title
 }
 
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <title>Books</title>
+    <head>
+        <meta charset="utf-8">
+        <title>Books</title>
 
-    <!-- Include SweetAlert2 using the CDN -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <!-- Include SweetAlert2 using the CDN -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <!-- Other head elements (styles, scripts, etc.) specific to this page go here -->
-</head>
-<body>
-    <h2>Books</h2>
+        <!-- Other head elements (styles, scripts, etc.) specific to this page go here -->
+    </head>
+    <body>
+        <h2>Books</h2>
 
-    <p>
-        <a asp-action="Add" asp-controller="Book" class="btn btn-primary">Add New Book</a>
-    </p>
+        <p>
+            <a asp-action="Add" asp-controller="Book" class="btn btn-primary">Add New Book</a>
+        </p>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Title</th>
-                <th>Author</th>
-                <th>ISBN</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var book in Model)
-            {
+        <table class="table">
+            <thead>
                 <tr>
-                    <td>@Html.DisplayFor(modelItem => book.Title)</td>
-                    <td>@Html.DisplayFor(modelItem => book.Author)</td>
-                    <td>@Html.DisplayFor(modelItem => book.ISBN)</td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@book.ID" asp-controller="Book">Edit</a> |
-                        <a href="javascript:void(0);" onclick="deleteBook(@book.ID)">Delete</a>
-                    </td>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>ISBN</th>
+                    <th></th>
                 </tr>
-            }
-        </tbody>
-    </table>
-
-    <script>
-        function deleteBook(bookId) {
-            Swal.fire({
-                title: 'Are you sure?',
-                text: 'You will not be able to recover this book!',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Yes, delete it!',
-                cancelButtonText: 'No, cancel!',
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    var xhr = new XMLHttpRequest();
-                    xhr.open('POST', '/Book/Delete/' + bookId, true);
-                    xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-                    xhr.onload = function () {
-                        if (xhr.status === 200) {
-                            Swal.fire({
-                                title: 'Deleted!',
-                                text: 'The book has been deleted successfully.',
-                                icon: 'success',
-                                timer: 2000, // Display the success message for 2 seconds
-                                timerProgressBar: true,
-                                showConfirmButton: false,
-                                willClose: () => {
-                                    location.reload();
-                                }
-                            });
-                        } else {
-                            Swal.fire('Error', 'The book has not been deleted successfully.', 'error');
-                        }
-                    };
-                    xhr.send();
+            </thead>
+            <tbody>
+                @foreach (var book in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => book.Title)</td>
+                        <td>@Html.DisplayFor(modelItem => book.Author)</td>
+                        <td>@Html.DisplayFor(modelItem => book.ISBN)</td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@book.ID" asp-controller="Book">Edit</a> |
+                            <a href="javascript:void(0);" onclick="deleteBook(@book.ID)">Delete</a>
+                        </td>
+                    </tr>
                 }
-            });
-        }
-    </script>
+            </tbody>
+        </table>
 
-</body>
+        <script>
+            // JavaScript code for deleting a book using SweetAlert2
+            function deleteBook(bookId) {
+                Swal.fire({
+                    title: 'Are you sure?', // Display a confirmation dialog title
+                    text: 'You will not be able to recover this book!', // Display a confirmation message
+                    icon: 'warning', // Display a warning icon
+                    showCancelButton: true, // Show a cancel button in the dialog
+                    confirmButtonText: 'Yes, delete it!', // Display a confirmation button with text
+                    cancelButtonText: 'No, cancel!', // Display a cancel button with text
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        var xhr = new XMLHttpRequest();
+                        xhr.open('POST', '/Book/Delete/' + bookId, true);
+                        xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+                        xhr.onload = function () {
+                            if (xhr.status === 200) {
+                                Swal.fire({
+                                    title: 'Deleted!', // Display a success message title
+                                    text: 'The book has been deleted successfully.', // Display a success message
+                                    icon: 'success', // Display a success icon
+                                    timer: 2000, // Display the success message for 2 seconds
+                                    timerProgressBar: true, // Show a timer progress bar
+                                    showConfirmButton: false, // Hide the confirmation button
+                                    willClose: () => {
+                                        location.reload(); // Reload the page after a successful delete
+                                    }
+                                });
+                            } else {
+                                Swal.fire('Error', 'The book has not been deleted successfully.', 'error');
+                                // Display an error message in case of an error
+                            }
+                        };
+                        xhr.send();
+                    }
+                });
+            }
+        </script>
+
+    </body>
 </html>
