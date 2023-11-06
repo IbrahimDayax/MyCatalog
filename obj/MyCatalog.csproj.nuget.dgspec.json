@@ -1,0 +1,90 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/ibrahim/Documents/MyCatalog/MyCatalog.csproj": {}
+  },
+  "projects": {
+    "/home/ibrahim/Documents/MyCatalog/MyCatalog.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/ibrahim/Documents/MyCatalog/MyCatalog.csproj",
+        "projectName": "MyCatalog",
+        "projectPath": "/home/ibrahim/Documents/MyCatalog/MyCatalog.csproj",
+        "packagesPath": "/home/ibrahim/.nuget/packages/",
+        "outputPath": "/home/ibrahim/Documents/MyCatalog/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/ibrahim/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.10, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "target": "Package",
+              "version": "[7.0.10, )"
+            },
+            "MySql.Data": {
+              "target": "Package",
+              "version": "[8.2.0, )"
+            },
+            "MySql.Data.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "MySql.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.10, )"
+            },
+            "Pomelo.EntityFrameworkCore.MySql": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/home/ibrahim/.dotnet/sdk/7.0.403/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
